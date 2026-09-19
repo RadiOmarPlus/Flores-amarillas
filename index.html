@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flores Amarillas 💛</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Dancing Script', cursive;
+    background:url('fondo.jpg') center center/cover fixed;
+    color:white;
+    overflow-x:hidden;
+    position:relative;
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
+}
+
+/* FLORES INICIALES */
+
+.intro{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+}
+
+.flor{
+    position:absolute;
+    font-size:5rem;
+    animation-duration:2s;
+    animation-fill-mode:forwards;
+}
+
+.flor.izq{
+    left:50%;
+    transform:translateX(-50%);
+    animation-name:abrirIzq;
+}
+
+.flor.der{
+    right:50%;
+    transform:translateX(50%);
+    animation-name:abrirDer;
+}
+
+@keyframes abrirIzq{
+    0%{
+        left:50%;
+        transform:translateX(-50%) scale(1.4);
+    }
+    100%{
+        left:10px;
+        transform:translateX(0) scale(.5);
+    }
+}
+
+@keyframes abrirDer{
+    0%{
+        right:50%;
+        transform:translateX(50%) scale(1.4);
+    }
+    100%{
+        right:10px;
+        transform:translateX(0) scale(.5);
+    }
+}
+
+/* CONTENIDO */
+
+.container{
+    max-width:430px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    margin:40px 0;
+    padding:25px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(4px);
+    border-radius:25px;
+    box-shadow:0 8px 30px rgba(0,0,0,.25);
+}
+
+.texto{
+    font-size:2rem;
+    line-height:1.6;
+    text-align:center;
+}
+
+/* FOTO */
+
+.foto-box{
+    margin:60px 0;
+    text-align:center;
+}
+
+.foto-box img{
+    width:100%;
+    max-width:350px;
+    border-radius:25px;
+    box-shadow:
+        0 0 20px rgba(255,215,0,.35),
+        0 10px 25px rgba(0,0,0,.35);
+}
+
+/* APARICION */
+
+.reveal{
+    opacity:0;
+    transform:translateY(50px);
+    transition:all 1s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* FINAL */
+
+.final{
+    min-height:50vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    position:relative;
+}
+
+.final h1{
+    font-size:4rem;
+    text-shadow:0 0 15px rgba(255,255,255,.5);
+}
+
+.corazon{
+    animation:latido 1.4s infinite;
+    display:inline-block;
+}
+
+@keyframes latido{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+
+/* PETALOS */
+
+.petalo{
+    position:fixed;
+    top:-30px;
+    font-size:24px;
+    animation:caer linear infinite;
+    pointer-events:none;
+}
+
+@keyframes caer{
+    from{
+        transform:translateY(-50px) rotate(0deg);
+    }
+    to{
+        transform:translateY(120vh) rotate(360deg);
+    }
+}
+
+/* MOVIL */
+
+@media(max-width:480px){
+
+    .texto{
+        font-size:1.7rem;
+    }
+
+    .final h1{
+        font-size:3.3rem;
+    }
+
+    .flor{
+        font-size:4rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="intro">
+    <div class="flor izq">🌻</div>
+    <div class="flor der">🌻</div>
+</section>
+
+<div class="container">
+
+    <div class="card reveal">
+        <div class="texto">
+            Stephany, tal vez no es mucho, tal vez es raro, tal vez es inusual y tal vez no quieras recibir algo de forma virtual, pero espero al menos te sorprenda algo así.
+            <br><br>
+            Te amo, eres mi vida y todo lo que deseo. Déjame seguir haciendo todo solo para ti.
+            <br><br>
+            Feliz día de las flores amarillas jsjsjs 💛
+        </div>
+    </div>
+
+    <div class="foto-box reveal">
+        <img src="manos.jpg" alt="Nosotros">
+    </div>
+
+    <div class="card reveal">
+        <div class="texto">
+            Esta foto es la única que tengo de los 2 juntos por ahora, pero quiero asegurarme de tener muchas más para nosotros y para nuestros hijos y quiero que todas y cada una de ellas sean especiales en más de una forma.
+            <br><br>
+            Nunca me sueltes, porque yo nunca te soltaré.
+        </div>
+    </div>
+
+</div>
+
+<section class="final reveal">
+    <h1>
+        TE AMO
+        <span class="corazon">❤️</span>
+    </h1>
+</section>
+
+<script>
+
+/* APARICION AL HACER SCROLL */
+
+const reveals = document.querySelectorAll('.reveal');
+
+function mostrar(){
+    reveals.forEach(el=>{
+        const top = el.getBoundingClientRect().top;
+        const visible = window.innerHeight - 100;
+
+        if(top < visible){
+            el.classList.add('visible');
+        }
+    });
+}
+
+window.addEventListener('scroll', mostrar);
+mostrar();
+
+/* PETALOS */
+
+function crearPetalo(){
+
+    const p = document.createElement('div');
+    p.classList.add('petalo');
+    p.innerHTML='🌼';
+
+    p.style.left=Math.random()*100+'vw';
+    p.style.animationDuration=(6+Math.random()*5)+'s';
+
+    document.body.appendChild(p);
+
+    setTimeout(()=>{
+        p.remove();
+    },12000);
+}
+
+setInterval(crearPetalo,800);
+
+</script>
+
+</body>
+</html>
